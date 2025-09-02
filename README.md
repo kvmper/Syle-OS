@@ -7,9 +7,11 @@
 - Add documentation
 - Optimize
 
-### Prerequisites
-
 ## Building and running
+
+### Prerequisites
+Run the `install_tools.sh` script. You can do it by going into the directory of that file and running `chmod +x install_tools.sh` and `./install_tools.sh`.
+
 To build the system, you need to be in root of the project then run `make build`. This will build the object files and the kernel.bin file then combine them into an .iso file, the file is located in /iso/ and you can run it by using `make run`.
 
 ## What will the finished OS be?
