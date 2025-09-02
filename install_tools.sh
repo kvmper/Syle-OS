@@ -23,13 +23,13 @@ do
                 echo "You do not have yay installed"
             else 
                 yay -Syu
-                for pkg in "${packages[@]}"; do
+                for pkg in "${packages_arch[@]}"; do
                     yay -S --noconfirm "$pkg"
                 done
             fi
         else
             sudo pacman -Syu
-            for pkg in "${packages[@]}"; do
+            for pkg in "${packages_arch[@]}"; do
                 sudo pacman -S --noconfirm "$pkg"
             done
         fi
