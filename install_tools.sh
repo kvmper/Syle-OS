@@ -12,6 +12,8 @@ packages_arch=(
   qemu
 )
 
+cat /etc/os-release
+
 select option in "Arch-based" "Debian-based" "Fedora" "Other"
 do
     case "$REPLY" in
