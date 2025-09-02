@@ -9,8 +9,47 @@ packages_arch=(
   grub
   xorriso
   mtools
-  qemu
+  qemu-full
+  gmp
+  libmpc
+  mpfr
 )
+packages_debian=(
+  build-essential
+  nasm
+  libc6-i386
+  binutils
+  grub-pc
+  xorriso
+  mtools
+  qemu
+  bison
+  flex
+  libgmp3-dev
+  libmpc-dev
+  libmpfr-dev
+  texinfo
+  libisl-dev
+)
+packages_fedora=(
+  @development-tools
+  nasm
+  glibc.i686
+  binutils
+  grub2
+  xorriso
+  mtools
+  qemu
+
+  bison
+  flex
+  gmp-devel
+  mpc-devel
+  mpfr-devel
+  texinfo
+  isl-devel
+)
+
 
 cat /etc/os-release
 
@@ -25,22 +64,23 @@ do
                 echo "You do not have yay installed"
             else 
                 yay -Syu
-                for pkg in "${packages_arch[@]}"; do
-                    yay -S --noconfirm "$pkg"
-                done
+                yay -S --noconfirm "${packages_arch[@]}"
             fi
         else
-            sudo pacman -Syu
-            for pkg in "${packages_arch[@]}"; do
-                sudo pacman -S --noconfirm "$pkg"
-            done
+            sudo pacman -Syu --noconfirm
+            sudo pacman -S --noconfirm "${packages_arch[@]}"
         fi
         break
         ;;
     2)
-        
+        sudo apt update && sudo apt upgrade -y
+        sudo apt install -y "${packages_debian[@]}"
+        break
         ;;
     3)
+        sudo dnf upgrade --refresh -y
+        sudo dnf install -y "${packages_fedora[@]}"
+        break
         ;;
     4)
         echo "Sorry, but you cannot run this script"
