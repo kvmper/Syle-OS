@@ -11,6 +11,7 @@
 
 ### Prerequisites
 Run the `install_tools.sh` script. You can do it by going into the directory of that file and running `chmod +x install_tools.sh` and `./install_tools.sh`.
+> Note: Only Arch, Fedora and Debian based distos are supported. I'm gonna update the script someday to make it better and support way more distributions. 
 
 To build the system, you need to be in root of the project then run `make build`. This will build the object files and the kernel.bin file then combine them into an .iso file, the file is located in /iso/ and you can run it by using `make run`.
 
