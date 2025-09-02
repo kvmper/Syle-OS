@@ -40,7 +40,6 @@ packages_fedora=(
   xorriso
   mtools
   qemu
-
   bison
   flex
   gmp-devel
