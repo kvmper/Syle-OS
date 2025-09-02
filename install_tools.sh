@@ -63,7 +63,7 @@ do
        
         if [[ "$aur_helper" =~ ^(yay|paru)$ ]]; then
             if ! command -v "$aur_helper" &> /dev/null; then
-                echo "You do not have $aur_helper installed, please install yay and re-run this script or choose not to use yay"
+                echo "You do not have $aur_helper installed, please install $aur_helper and re-run this script or choose not to use $aur_helper"
             else 
                 $aur_helper -Syu
                 $aur_helper -S --noconfirm "${packages_arch[@]}"
