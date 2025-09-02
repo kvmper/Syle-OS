@@ -55,7 +55,7 @@ cat /etc/os-release
 echo
 echo -e "\e[33mIf you do not know what distro you are currently using, refer to above.\e[0m"
 
-select option in "Arch-based" "Debian-based" "Fedora" "Other"
+select option in "Arch-based" "Debian-based" "Fedora-based" "Other"
 do
     case "$REPLY" in
     1)
@@ -75,13 +75,23 @@ do
         break
         ;;
     2)
-        sudo apt update && sudo apt upgrade -y
-        sudo apt install -y "${packages_debian[@]}"
+        
+        if ! command -v apt &> /dev/null; then
+            echo "You are not using a debian-based distro" 
+        else
+            sudo apt update && sudo apt upgrade -y
+            sudo apt install -y "${packages_debian[@]}"
+        fi
         break
         ;;
     3)
-        sudo dnf upgrade --refresh -y
-        sudo dnf install -y "${packages_fedora[@]}"
+        if ! command -v dnf &> /dev/null; then
+            echo "You are not using a fedora-based distro" 
+        else
+            sudo dnf upgrade --refresh -y
+            sudo dnf install -y "${packages_fedora[@]}"
+        fi
+
         break
         ;;
     4)
