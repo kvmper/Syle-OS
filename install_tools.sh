@@ -61,14 +61,23 @@ echo
 echo -e "\e[33mIf you do not know what distro you are currently using, refer to above.\e[0m"
 
 package_state() {
-  local pkgs=("$@")
-  for pkg in "${pkgs[@]}"; do
-    if pacman -Q "$pkg" &> /dev/null; then
-        echo -e "${GREEN}Installed${RESET} $pkg"
-    else
-        echo -e "${YELLOW}Not Installed${RESET} $pkg"
-    fi
-done
+    local distro="$1"
+    shift
+    local pkgs=("$@")
+
+    for pkg in "${pkgs[@]}"; do
+        case "$distro" in
+            arch)   pacman -Q "$pkg" &> /dev/null ;;
+            debian) dpkg -s "$pkg" &> /dev/null ;;
+            fedora) rpm -q "$pkg" &> /dev/null ;;
+        esac
+
+        if [[ $? -eq 0 ]]; then
+            echo -e "${GREEN}Installed${RESET} $pkg"
+        else
+            echo -e "${YELLOW}Not Installed${RESET} $pkg"
+        fi
+    done
 }
 
 
@@ -90,6 +99,7 @@ do
             sudo pacman -Syu --noconfirm
             sudo pacman -S --noconfirm "${packages_arch[@]}"
         fi
+        package_state arch "${packages_arch[@]}"
         break
         ;;
     2)
@@ -100,6 +110,7 @@ do
             sudo apt update && sudo apt upgrade -y
             sudo apt install -y "${packages_debian[@]}"
         fi
+        package_state debian "${packages_debian[@]}"
         break
         ;;
     3)
@@ -109,7 +120,7 @@ do
             sudo dnf upgrade --refresh -y
             sudo dnf install -y "${packages_fedora[@]}"
         fi
-
+        package_state fedora "${packages_fedora[@]}"
         break
         ;;
     4)
@@ -120,5 +131,4 @@ do
         echo "Invalid choice"
         ;;
     esac
-    package_state "${packages_arch[@]}" "${packages_fedora[@]}" "${packages_debian[@]}"
 done
