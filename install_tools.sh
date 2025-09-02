@@ -51,11 +51,6 @@ packages_fedora=(
   texinfo
   isl-devel
 )
-
-install_arch_packages() {
-    sudo pacman -Syu --noconfirm
-    sudo pacman -S --noconfirm "${packages_arch[@]}"
-}
  
 cat /etc/os-release
 echo
@@ -76,7 +71,8 @@ do
                 $aur_helper -S --noconfirm "${packages_arch[@]}"
             fi
         else
-            install_arch_packages()
+            sudo pacman -Syu --noconfirm
+            sudo pacman -S --noconfirm "${packages_arch[@]}"
         fi
         break
         ;;
