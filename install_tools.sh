@@ -3,6 +3,10 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+GREEN="\e[32m"
+YELLOW="\e[33m"
+RESET="\e[0m"
+
 packages_arch=(
   base-devel
   nasm
@@ -56,6 +60,18 @@ cat /etc/os-release
 echo
 echo -e "\e[33mIf you do not know what distro you are currently using, refer to above.\e[0m"
 
+package_state() {
+  local pkgs=("$@")
+  for pkg in "${pkgs[@]}"; do
+    if pacman -Q "$pkg" &> /dev/null; then
+        echo -e "${GREEN}Installed${RESET} $pkg"
+    else
+        echo -e "${YELLOW}Not Installed${RESET} $pkg"
+    fi
+done
+}
+
+
 select option in "Arch-based" "Debian-based" "Fedora-based" "Other"
 do
     case "$REPLY" in
@@ -104,4 +120,5 @@ do
         echo "Invalid choice"
         ;;
     esac
+    package_state "${packages_arch[@]}" "${packages_fedora[@]}" "${packages_debian[@]}"
 done
