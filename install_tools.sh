@@ -95,6 +95,7 @@ do
         ;;
     4)
         echo "Sorry, but you cannot run this script"
+        break
         ;;
     *)
         echo "Invalid choice"
