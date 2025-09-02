@@ -19,3 +19,7 @@ To build the system, you need to be in root of the project then run `make build`
 The finished Operating System will have most basic features such as, file creation, reading from disk, and a basic FAT16 filesystem. It will also consist of a basic shell which can do tasks such as removing, creating files and way more.
 ## Is it near completion, when will it be finished?
 No, it is not anywhere **near** completion, it will take years for it to be finished. I'm not thinking of stopping working on this project anytime soon. I'm looking for people who will help me find issues with this project and provide recommendations to improve the project as it grows.
+
+## Development
+
+Currently, the development is focused on scripts. After I finish making scripts work will continue onto the kernel by adding things mentioned in the "Current tasks" section.
