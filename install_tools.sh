@@ -59,7 +59,7 @@ do
     case "$REPLY" in
     1)
         read -p "Which AUR helper do you want to use? [yay/paru/none] " aur_helper
-        aur_helper=${aur_helper:-yay}
+        aur_helper=${aur_helper:-none}
        
         if [[ "$aur_helper" =~ ^(yay|paru)$ ]]; then
             if ! command -v "$aur_helper" &> /dev/null; then
