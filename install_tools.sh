@@ -52,6 +52,8 @@ packages_fedora=(
 
 
 cat /etc/os-release
+echo
+echo -e "\e[33mIf you do not know what distro you are currently using, refer to above.\e[0m"
 
 select option in "Arch-based" "Debian-based" "Fedora" "Other"
 do
