@@ -2,9 +2,10 @@
 
 **Current tasks:**
 - Organize the code and split it into multiple files
-- Add more functionality
 - Replace grub with a custom multiboot bootloader
-
+- Add more functionality
+- Add documentation
+- Optimize
 ## What will the finished OS be?
 The finished Operating System will have most basic features such as, file creation, reading from disk, and a basic FAT16 filesystem. It will also consist of a basic shell which can do tasks such as removing, creating files and way more.
 ## Is it near completion, when will it be finished?
