@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -euo pipefail
+IFS=$'\n\t'
+
 packages_arch=(
   base-devel
   nasm
@@ -49,7 +52,11 @@ packages_fedora=(
   isl-devel
 )
 
-
+install_arch_packages() {
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S --noconfirm "${packages_arch[@]}"
+}
+ 
 cat /etc/os-release
 echo
 echo -e "\e[33mIf you do not know what distro you are currently using, refer to above.\e[0m"
@@ -69,8 +76,7 @@ do
                 $aur_helper -S --noconfirm "${packages_arch[@]}"
             fi
         else
-            sudo pacman -Syu --noconfirm
-            sudo pacman -S --noconfirm "${packages_arch[@]}"
+            install_arch_packages()
         fi
         break
         ;;
