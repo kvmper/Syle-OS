@@ -58,14 +58,15 @@ select option in "Arch-based" "Debian-based" "Fedora-based" "Other"
 do
     case "$REPLY" in
     1)
-        read -p "Do you want to use yay? [Y/n] " answer
-        answer=${answer:-Y}
-        if [[ "$answer" =~ ^[Yy]$ ]]; then
-            if ! command -v yay &> /dev/null; then
-                echo "You do not have yay installed, please install yay and re-run this script or choose not to use yay"
+        read -p "Which AUR helper do you want to use? [yay/paru/none] " aur_helper
+       aur_helper=${aur_helper:-yay}
+       
+        if [[ "$aur_helper" =~ ^(yay|paru)$ ]]; then
+            if ! command -v "$aur_helper" &> /dev/null; then
+                echo "You do not have $aur_helper installed, please install yay and re-run this script or choose not to use yay"
             else 
-                yay -Syu
-                yay -S --noconfirm "${packages_arch[@]}"
+                $aur_helper -Syu
+                $aur_helper -S --noconfirm "${packages_arch[@]}"
             fi
         else
             sudo pacman -Syu --noconfirm
