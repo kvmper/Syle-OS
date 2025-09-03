@@ -23,3 +23,5 @@ No, it is not anywhere **near** completion, it will take years for it to be fini
 ## Development
 
 Currently, the development is focused on scripts. After I finish making scripts work will continue onto the kernel by adding things mentioned in the "Current tasks" section. The tree of the project is also gonna be improved and non-essential stuff will be removed.
+
+**Current state:** Broken, fixing
