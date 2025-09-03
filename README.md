@@ -1,4 +1,4 @@
-# Syle OS - The worst OS you will ever see
+# Syle OS - Experimental branch
 
 ### Current tasks:
 - Organize the code and split it into multiple files
