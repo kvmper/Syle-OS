@@ -99,6 +99,7 @@ do
             sudo pacman -Syu --noconfirm
             sudo pacman -S --noconfirm "${packages_arch[@]}"
         fi
+
         package_state arch "${packages_arch[@]}"
         break
         ;;
