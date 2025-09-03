@@ -14,7 +14,7 @@ kernel/obj/boot.o: kernel/src/asm/boot.s
 
 # this compiles kernel.c file into a kernel.o file 
 kernel/obj/kernel.o: kernel/src/c/kernel.c
-	gcc -m32 -ffreestanding -c $< -o $@ 
+	gcc -m32 -ffreestanding -fno-stack-protector -c $< -o $@ 
 
 # build
 build: $(ISO) # the "$(ISO) points to iso/os.iso
