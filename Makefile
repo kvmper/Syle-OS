@@ -1,31 +1,29 @@
 # i know the comments are bad, i will improve them later
 
 # variables
-ISO = boot/os.iso # for example this is used in "build: $(ISO)", basically a shortcut
-KERNEL = kernel/bin/kernel.bin
-OBJS = kernel/obj/boot.o kernel/obj/kernel.o
+ISO = build/os.iso # for example this is used in "build: $(ISO)", basically a shortcut
+KERNEL = build/bin/kernel.bin
+OBJS = build/obj/boot.o build/obj/kernel.o
 
 $(KERNEL): $(OBJS)
 	ld -m elf_i386 -T kernel/src/link.ld -o $@ $^ # linker script, necessary for the OS to work
 
-kernel/obj/boot.o: kernel/src/asm/boot.s
-	mkdir -p kernel/obj
+build/obj/boot.o: kernel/src/asm/boot.s
+	mkdir -p build/obj
 	nasm -f elf32 $< -o $@
 
 # this compiles kernel.c file into a kernel.o file 
-kernel/obj/kernel.o: kernel/src/c/kernel.c
+build/obj/kernel.o: kernel/src/c/kernel.c
 	gcc -m32 -ffreestanding -fno-stack-protector -c $< -o $@ 
 
 # build
-build: $(ISO) # the "$(ISO) points to iso/os.iso
-$(ISO): $(KERNEL) boot/boot/grub/grub.cfg
-	mkdir -p kernel/bin
-	mkdir -p boot/
-	cp $(KERNEL) boot/boot/
-	grub-mkrescue -o $@ boot
+build: $(ISO) # the "$(ISO) points to build/os.iso
+$(ISO): $(KERNEL) #build/boot/grub/grub.cfg
+	mkdir -p build/bin
+	grub-mkrescue -o $@ build
 
 run: $(ISO)
 	qemu-system-i386 -cdrom $<
 
 clean:
-	rm -rf kernel/obj/* kernel/bin/* boot/boot/kernel.bin $(ISO) # cleans files as the name says
+	rm -rf build/obj/* build/bin/* $(ISO) # cleans files as the name says
