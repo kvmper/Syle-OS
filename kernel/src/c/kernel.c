@@ -5,6 +5,35 @@ const unsigned int multiboot_header[] = {
     -(0x1BADB002 + 0x0)
 };
 
+
+/*
+__        ___    ____  _   _ ___ _   _  ____ 
+\ \      / / \  |  _ \| \ | |_ _| \ | |/ ___|
+ \ \ /\ / / _ \ | |_) |  \| || ||  \| | |  _ 
+  \ V  V / ___ \|  _ <| |\  || || |\  | |_| |
+   \_/\_/_/   \_\_| \_\_| \_|___|_| \_|\____|
+
+    CHANGING ANYTHING MAY BREAK THE OS
+    REMEMBER TO RUN MAKE BUILD AFTER CHANGING ANYTHING
+
+*/
+
+/*
+ ___ __  __ ____  ____   _____     _______ __  __ _____ _   _ _____ ____  
+|_ _|  \/  |  _ \|  _ \ / _ \ \   / / ____|  \/  | ____| \ | |_   _/ ___| 
+ | || |\/| | |_) | |_) | | | \ \ / /|  _| | |\/| |  _| |  \| | | | \___ \ 
+ | || |  | |  __/|  _ <| |_| |\ V / | |___| |  | | |___| |\  | | |  ___) |
+|___|_|  |_|_|   |_| \_\\___/  \_/  |_____|_|  |_|_____|_| \_| |_| |____/ 
+
+To be imrpoved:
+- Change keyboard() (when holding shift toggle caps_lock to true and after release make it false)
+- Change sleep() (so it actually waits)
+- Organize code (split into multiple files)
+- Add comments
+*/
+
+
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -144,7 +173,7 @@ char scancodes_upper[128] = {
     [0x39] = ' ',
 };
 
-void __stack_chk_fail_local() {
+void __stack_chk_fail_local() { // Do not remove, the compiler will probably give you an error
 
 }
 
@@ -195,17 +224,8 @@ void clear() {
     }
 }
 
-void commands() {
-    const char* commands[] = {
-        "help",
-    };
-
-}
-
-
 void kernel_main() {
-
-
+    
     background();
     print("[shell] ?:", 0x1, 0xF);
 
