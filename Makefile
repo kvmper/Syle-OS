@@ -1,21 +1,30 @@
-all:
-	make build
-	make run
+# variables
+ISO = iso/os.iso
+KERNEL = kernel/bin/kernel.bin
+OBJS = kernel/obj/boot.o kernel/obj/kernel.o
 
-build:
-	make clean
-	mkdir -p kernel/obj kernel/bin iso/boot/grub
-	nasm -f elf32 kernel/src/asm/boot.s -o kernel/obj/boot.o
-	gcc -m32 -ffreestanding -c kernel/src/c/kernel.c -o kernel/obj/kernel.o
-	ld -m elf_i386 -T kernel/src/link.ld -o kernel/bin/kernel.bin kernel/obj/boot.o kernel/obj/kernel.o
+$(KERNEL): $(OBJS)
+	ld -m elf_i386 -T kernel/src/link.ld -o $@ $^
 
-	cp kernel/bin/kernel.bin iso/boot
+kernel/obj/boot.o: kernel/src/asm/boot.s
+	mkdir -p kernel/obj
+	nasm -f elf32 $< -o $@
+
+kernel/obj/kernel.o: kernel/src/c/kernel.c
+	gcc -m32 -ffreestanding -c $< -o $@
+
+# build
+build: $(ISO)
+$(ISO): $(KERNEL) boot/grub/grub.cfg
+	mkdir -p iso/boot/grub
+	cp $(KERNEL) iso/boot/
 	cp boot/grub/grub.cfg iso/boot/grub/
-	grub-mkrescue -o iso/os.iso iso/
+	grub-mkrescue -o $@ iso
 
+# run
+run: $(ISO)
+	qemu-system-i386 -cdrom $<
+
+# clean
 clean:
-	rm -rf iso/os.iso
-	rm -rf kernel/obj/*
-	rm -rf kernel/bin/*
-run:
-	qemu-system-i386 -cdrom iso/os.iso
+	rm -rf kernel/obj kernel/bin $(ISO)
