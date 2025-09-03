@@ -1,3 +1,5 @@
+# i know the comments are useless
+
 # variables
 ISO = iso/os.iso
 KERNEL = kernel/bin/kernel.bin
