@@ -1,6 +1,7 @@
 # Syle OS - Master branch
 
 ### Current tasks:
+- **Everything** needs to be remade
 - Organize the code and split it into multiple files
 - Replace grub with a custom multiboot bootloader
 - Add more functionality
