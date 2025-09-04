@@ -1,4 +1,4 @@
-# Syle OS - Experimental branch
+# Syle OS - Master branch
 
 ### Current tasks:
 - Organize the code and split it into multiple files
@@ -24,8 +24,4 @@ No, it is not anywhere **near** completion, it will take years for it to be fini
 
 Currently, the development is focused on scripts. After I finish making scripts work will continue onto the kernel by adding things mentioned in the "Current tasks" section. The tree of the project is also gonna be improved and non-essential stuff will be removed.
 
-<<<<<<< HEAD
-**Current state:** Working - improving the tree
-=======
-**Current state:** Improving the tree
->>>>>>> experimental
+**Current state:** Working
