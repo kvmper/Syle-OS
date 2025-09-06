@@ -26,3 +26,4 @@ No, it is not anywhere **near** completion, it will take years for it to be fini
 Currently, the development is focused on scripts. After I finish making scripts work will continue onto the kernel by adding things mentioned in the "Current tasks" section. The tree of the project is also gonna be improved and non-essential stuff will be removed.
 
 **Current state:** Development is slowed down, but has not stopped (everything will become way better)
+> This is an old project i found in my projects folder and i think it is easier for me to remake this entire os by rewriting it from scratch, currently working on Axoryn (continuation of this project)
